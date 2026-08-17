@@ -27,12 +27,15 @@ function materialOf(model) {
   return "Stone";
 }
 
-export function renderPlans(base, { scale = 62, pad = 30, gap = 26 } = {}) {
-  const levels = [...base.levels.keys()].sort((a, b) => a - b);
+export function renderPlans(base, opts = {}) {
+  const { scale = 62, pad = 30, gap = 26, cols: colsOpt, header = true, legend: showLegend = true, only } = opts;
+  const levels = [...base.levels.keys()].sort((a, b) => a - b).filter((k) => !only || only.includes(k));
+  const allLevels = [...base.levels.keys()];
 
   // one shared extent so panels line up
   let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
-  for (const lv of base.levels.values()) {
+  for (const k of allLevels) {
+    const lv = base.levels.get(k);
     for (const cell of lv.cells.values()) {
       for (const [x, z] of G.cellCorners(cell)) {
         minX = Math.min(minX, x); maxX = Math.max(maxX, x);
@@ -46,10 +49,12 @@ export function renderPlans(base, { scale = 62, pad = 30, gap = 26 } = {}) {
   const h = (maxZ - minZ) * scale;
   const panelW = w + pad * 2;
   const panelH = h + pad * 2 + 26;
-  const cols = Math.min(levels.length, 2);
+  const cols = Math.min(levels.length, colsOpt || 2);
   const rows = Math.ceil(levels.length / cols);
-  const totalW = cols * panelW + (cols - 1) * gap + 32;
-  const totalH = rows * panelH + (rows - 1) * gap + 74;
+  const headH = header ? 68 : 8;
+  const legH = showLegend ? 30 : 8;
+  const totalW = cols * panelW + (cols - 1) * gap + (header || showLegend ? 32 : 16);
+  const totalH = rows * panelH + (rows - 1) * gap + headH + legH;
 
   const parts = [];
   parts.push(
@@ -57,18 +62,20 @@ export function renderPlans(base, { scale = 62, pad = 30, gap = 26 } = {}) {
     `viewBox="0 0 ${Math.round(totalW)} ${Math.round(totalH)}" font-family="ui-monospace,Menlo,Consolas,monospace">`,
   );
   parts.push(`<rect width="100%" height="100%" fill="#14161a"/>`);
-  parts.push(
-    `<text x="16" y="30" fill="#e8e6e1" font-size="19" font-weight="700">${esc(base.name)}</text>` +
-    `<text x="16" y="50" fill="#8b8f98" font-size="12">${esc(base.tagline)}</text>`,
-  );
+  if (header) {
+    parts.push(
+      `<text x="16" y="30" fill="#e8e6e1" font-size="19" font-weight="700">${esc(base.name)}</text>` +
+      `<text x="16" y="50" fill="#8b8f98" font-size="12">${esc(base.tagline)}</text>`,
+    );
+  }
 
   levels.forEach((k, idx) => {
-    const ox = 16 + (idx % cols) * (panelW + gap);
-    const oy = 68 + Math.floor(idx / cols) * (panelH + gap);
+    const ox = (header || showLegend ? 16 : 8) + (idx % cols) * (panelW + gap);
+    const oy = headH + Math.floor(idx / cols) * (panelH + gap);
     parts.push(renderLevel(base, k, { ox, oy, panelW, panelH, pad, scale, minX, maxZ }));
   });
 
-  parts.push(legend(totalW, totalH));
+  if (showLegend) parts.push(legend(totalW, totalH));
   parts.push("</svg>");
   return parts.join("\n");
 }
