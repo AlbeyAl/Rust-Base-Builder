@@ -14,9 +14,10 @@ import { costSummary, raidCosts, openRooms, sulfurForRockets, tcLocation } from 
 import * as bastion from "./bases/bastion.mjs";
 import * as halberd from "./bases/halberd.mjs";
 import * as citadel from "./bases/citadel.mjs";
+import * as caltrop from "./bases/caltrop.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DESIGNS = [halberd, bastion, citadel];
+const DESIGNS = [halberd, bastion, citadel, caltrop];
 
 const n = (v) => v.toLocaleString("en-US");
 

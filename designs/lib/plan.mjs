@@ -175,6 +175,18 @@ function renderLevel(base, k, o) {
         `width="${(pw * scale).toFixed(1)}" height="${(pd * scale).toFixed(1)}" rx="2" ` +
         `fill="${PROP_COLOR[obj.model] || "#999"}" fill-opacity="0.85" stroke="#11131600"/></g>`,
       );
+    } else if (/FloorFrame(Square|Triangle)$/.test(obj.model)) {
+      // the hole you shoot down through
+      const r = obj.model.endsWith("Square") ? 0.62 : 0.42;
+      const c = obj.model.endsWith("Square") ? [px, pz] : [px + G.dir(obj.rot)[0] * 0.75, pz + G.dir(obj.rot)[1] * 0.75];
+      out.push(
+        `<circle cx="${X(c[0]).toFixed(1)}" cy="${Y(c[1]).toFixed(1)}" r="${(r * scale).toFixed(1)}" ` +
+        `fill="#0c0e11" stroke="#d9a520" stroke-width="1.6" stroke-dasharray="5 4"/>`,
+      );
+      labels.push(
+        `<text x="${X(c[0]).toFixed(1)}" y="${(Y(c[1]) + 3.5).toFixed(1)}" fill="#d9a520" font-size="9" ` +
+        `text-anchor="middle" letter-spacing="0.08em">HOLE</text>`,
+      );
     } else if (/Roof(Square|Triangle)$/.test(obj.model)) {
       const d = G.dir(obj.rot);
       out.push(

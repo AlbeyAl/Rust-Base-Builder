@@ -4,21 +4,22 @@ Three duo bases built with this repo's builder, plus the toolkit that generated
 them. Every design is a real, importable base: the `.txt` files in `out/` are
 the exact strings the app's **Import → via code** field takes.
 
-|                                        | HALBERD | BASTION | CITADEL |
-| -------------------------------------- | ------: | ------: | ------: |
-| Footprint (foundations)                | 4 + 8 tri | 4 + 8 tri | 6 + 10 tri |
-| Levels                                 | 3 | 4 | 4 |
-| Structural objects                     | 85 | 130 | 177 |
-| Stone                                  | 13,830 | 21,810 | 28,410 |
-| Metal frags                            | 2,200 | 3,150 | 4,700 |
-| HQM                                    | 177 | 279 | 431 |
-| Wood (twig → wood)                     | 2,659 | 4,193 | 5,595 |
-| Upkeep / day (stone)                   | 1,952 | 3,397 | 4,801 |
-| **Rockets to the TC**                  | **10** | **14** | **16** |
-| Sulfur to the TC                       | 14,000 | 19,600 | 22,400 |
-| Embrasure peeks                        | 4 | 6 | 8 |
-| Large boxes placed                     | 8 | 15 | 28 |
-| Unsealed rooms (walk-in)               | 0 | 0 | 0 |
+|                                        | HALBERD | BASTION | CITADEL | CALTROP |
+| -------------------------------------- | ------: | ------: | ------: | ------: |
+| Footprint (foundations)                | 4 + 8 tri | 4 + 8 tri | 6 + 10 tri | 4 + 8 tri |
+| Levels                                 | 3 | 4 | 4 | 5 |
+| Structural objects                     | 85 | 130 | 177 | 177 |
+| Stone                                  | 13,830 | 21,810 | 28,410 | 26,955 |
+| Metal frags                            | 2,200 | 3,150 | 4,700 | 4,750 |
+| HQM                                    | 177 | 279 | 431 | 391 |
+| Wood (twig → wood)                     | 2,659 | 4,193 | 5,595 | 5,291 |
+| Upkeep / day (stone)                   | 1,952 | 3,397 | 4,801 | 4,555 |
+| **Rockets to the TC**                  | **10** | **14** | **16** | **14** |
+| Sulfur to the TC                       | 14,000 | 19,600 | 22,400 | 19,600 |
+| Firing slots                           | 4 | 6 | 8 | **20** |
+| Distinct firing bearings               | 3 | 4 | 4 | **12** |
+| Large boxes placed                     | 8 | 15 | 28 | 13 |
+| Unsealed rooms (walk-in)               | 0 | 0 | 0 | 0 |
 
 `build.mjs` prints all of this and writes the base codes and the floor plans:
 
@@ -226,3 +227,77 @@ counts and the materials land where the plans say they do.
 - **No pixel gaps.** The builder cannot yet place pixel-gap or wide-gap
   structures, so none of these designs contain a true bunker. The armoured
   suite/keep is the strongest thing this toolset can express.
+
+---
+
+## CALTROP — the rosette turret
+
+![CALTROP](plans/caltrop.svg)
+
+**26,955 stone · 391 HQM · 14 rockets to the TC · ~4,550 stone/day upkeep**
+
+A caltrop always has a spike pointing at you, whichever way it lands. That is
+the whole design: **20 firing slots on 12 bearings exactly 30° apart, with no
+gap anywhere on the compass and every bearing covered from two different
+heights.**
+
+### The rosette
+
+The trick is that triangles and squares fire at angles that cannot overlap.
+
+A triangle hangs off a square edge, so its two slant faces sit at ±60° from that
+edge's bearing — **30, 60, 120, 150, 210, 240, 300, 330**. The square's own
+faces sit on the cardinals — **0, 90, 180, 270**. Neither set touches the other.
+So put one firing ring on the triangles and another on the square, one storey
+apart, and the union is a perfect 30° rosette:
+
+| Ring | Level | Slots | Bearings |
+| ---- | ----- | ----: | -------- |
+| Gallery (triangle pods) | L2 | 14 (12 embrasure + 2 glass) | 30, 60, 120, 150, 210, 240, 300, 330 |
+| Crown (block faces) | L3 | 6 embrasure | 0, 90, 180, 270 |
+| **Union** | | **20** | **12 bearings, every gap exactly 30°** |
+
+`node designs/build.mjs` re-derives that from the exported base, so it is a
+checked property of the geometry, not a claim about it. Break the crown's line
+of sight by hugging a rock and the gallery two metres below still has you.
+
+The gallery is one continuous star-shaped room — six triangle pods opening
+straight onto the walkway, no doors between them — so one player walks a ring
+and never opens anything to change angle. The crown is a single open drum you
+pivot inside. The two triangles hanging off the stair spine stay sealed
+honeycomb: opening them would sell the spine for four rockets.
+
+### The oubliette
+
+The airlock triangle gets **no ceiling on L1 or L2** and a floor frame at the
+top. That makes it a three-storey stone shaft with your own front door at the
+bottom of it. Blow the outer garage and you are standing in a 3 × 3 m tube being
+shot at from directly overhead, with nothing to build on inside the TC radius.
+
+It costs the base nothing. The pod sits behind its own garage door, so the
+gallery is four rockets whether the shaft is there or not.
+
+It did cost one wall, though, and the analyser is what found it. The shaft runs
+up the inside of the honeycomb, so on L1 it shares a wall with the loot vault —
+and that wall used to be stone. Outer garage (3) plus one stone wall (4) was a
+**seven-rocket bypass straight into the vault**, skipping the whole door chain.
+Armouring that single wall — 25 HQM — put it back to 14.
+
+| Room | Rockets |
+| ---- | ------: |
+| L0 smelting, bulk storage | 8 |
+| L1 loot vault | 8 |
+| L1 suite: utility / electricity | 11 |
+| **L1 suite: core (TC)** | **14** |
+
+Same number as BASTION on the same footprint, and the binding route is still the
+shell — honeycomb (4) → core wall (4) → garage (3) → garage (3) — not a
+shortcut. The two firing floors are sacrificial and hold ammo; the TC never
+leaves the armoured suite under its armoured lid.
+
+### Cost of the flex
+
+18 embrasures, 2 glass, a third storey of honeycomb, a fourth staircase and a
+five-level spine put this at CITADEL money on a 2 × 2 footprint. It buys no
+extra storage — 13 large boxes against CITADEL's 28. What it buys is that
+nobody gets to approach from an angle you are not already looking down.

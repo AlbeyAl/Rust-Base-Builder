@@ -289,5 +289,84 @@
     ],
     "leaks": 0,
     "codeLength": 5416
+  },
+  {
+    "slug": "caltrop",
+    "name": "CALTROP",
+    "tagline": "2x2 rosette turret - 5 levels, 20 slots on 12 bearings exactly 30 deg apart, and a 3-storey murder shaft over the front door.",
+    "notes": [
+      "Point the airlock triangle at your busiest approach. It is the one you WANT people walking into.",
+      "Fight from the gallery (L2), not the crown. The crown is for range and for watching; the gallery has the shaft.",
+      "Leave the oubliette pod's garage door open when you are home and shut it when you log. Closed, it costs the base nothing.",
+      "Nothing valuable above L1. Both firing floors are meant to be lost."
+    ],
+    "objects": 200,
+    "structural": 177,
+    "build": {
+      "stone": 26955,
+      "metal": 4750,
+      "hqm": 391,
+      "wood": 5291
+    },
+    "upkeep": {
+      "stone": 4555,
+      "metal": 803,
+      "hqm": 66,
+      "wood": 894
+    },
+    "upkeepRampup": 0.16898305084745763,
+    "rocketsToTC": 14,
+    "sulfurToTC": 19600,
+    "targets": [
+      {
+        "level": 0,
+        "label": "smelting",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk storage",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "loot vault\n+ workbench",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "SUITE: utility\n+ electricity",
+        "rockets": 11
+      },
+      {
+        "level": 1,
+        "label": "SUITE: core\nTC + bags",
+        "rockets": 14
+      }
+    ],
+    "tcRoute": [
+      {
+        "into": "",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "loot vault\n+ workbench",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "SUITE: utility\n+ electricity",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "SUITE: core\nTC + bags",
+        "via": "GarageDoor",
+        "cost": 3
+      }
+    ],
+    "leaks": 0,
+    "codeLength": 5104
   }
 ]

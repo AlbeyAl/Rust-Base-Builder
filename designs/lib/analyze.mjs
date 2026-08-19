@@ -99,7 +99,9 @@ export function graph(base) {
     for (const cellId of lv.cells.keys()) {
       const ceiling = above ? (above.floor.get(cellId) || above.cover.get(cellId)) : undefined;
       const upNode = above && above.cells.has(cellId) ? nodeId(k + 1, cellId) : OUTSIDE;
-      const cost = ceiling ? rockets(ceiling) : 0;
+      // an empty floor frame is a hole, not a ceiling
+      const sealed = ceiling && !(above && above.openFloor.has(cellId));
+      const cost = sealed ? rockets(ceiling) : 0;
       // a space with no ceiling is open to whatever is above it
       link(nodeId(k, cellId), upNode, cost, ceiling || "open sky");
     }

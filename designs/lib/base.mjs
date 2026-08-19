@@ -37,6 +37,7 @@ export class Base {
         cells: new Map(),      // cellId -> cell  (a walkable space exists here)
         floor: new Map(),      // cellId -> model of its floor/foundation
         cover: new Map(),      // cellId -> model of a roof placed at this level
+        openFloor: new Set(),  // cellIds whose floor is an empty frame - a hole
         edges: new Map(),      // edgeKey -> { p, rot, models: [] }
         rooms: new Map(),      // cellId -> { label, kind }
       });
@@ -94,6 +95,21 @@ export class Base {
           const model = c.kind === "sq" ? `${mat}FloorSquare` : `${mat}FloorTriangle`;
           self._push(model, c.kind === "sq" ? c.c : c.p, y, c.kind === "sq" ? 0 : c.rot, "floor");
           registerCell(c, model);
+        }
+        return this;
+      },
+
+      /**
+       * A floor frame with nothing in it: you stand on the ring and shoot
+       * straight down through the hole. Counts as a floor for standing on and
+       * as an opening for the seal check.
+       */
+      floorFrames(cells, mat = "Stone") {
+        for (const c of [].concat(cells)) {
+          const model = c.kind === "sq" ? `${mat}FloorFrameSquare` : `${mat}FloorFrameTriangle`;
+          self._push(model, c.kind === "sq" ? c.c : c.p, y, c.kind === "sq" ? 0 : c.rot, "floor");
+          registerCell(c, model);
+          lv.openFloor.add(c.id);
         }
         return this;
       },
