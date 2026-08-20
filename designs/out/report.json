@@ -1,0 +1,372 @@
+[
+  {
+    "slug": "halberd",
+    "name": "HALBERD",
+    "tagline": "2x2, two lived-in storeys, one honeycomb ring - 4 peeks, 8 large boxes, 10 rockets to the TC.",
+    "notes": [
+      "Build order: 4 + 8 foundations, core walls, airlock, then the honeycomb ring. Sleep in the core from day one.",
+      "The armoured shell - core walls, core floor and ceiling, shaft walls and shaft cap - is 177 HQM in total.",
+      "Upgrade path: add a second honeycomb ring on L1, move the peeks up to a new L2, and you have BASTION."
+    ],
+    "objects": 101,
+    "structural": 85,
+    "build": {
+      "stone": 13830,
+      "metal": 2200,
+      "hqm": 177,
+      "wood": 2659
+    },
+    "upkeep": {
+      "stone": 1952,
+      "metal": 311,
+      "hqm": 25,
+      "wood": 375
+    },
+    "upkeepRampup": 0.1411764705882353,
+    "rocketsToTC": 10,
+    "sulfurToTC": 14000,
+    "targets": [
+      {
+        "level": 1,
+        "label": "loot vault\nS + W peeks",
+        "rockets": 4
+      },
+      {
+        "level": 1,
+        "label": "utility / electricity\nN + W peeks",
+        "rockets": 4
+      },
+      {
+        "level": 0,
+        "label": "smelting",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk storage",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "ARMOURED CORE\nTC + bags",
+        "rockets": 10
+      }
+    ],
+    "tcRoute": [
+      {
+        "into": "",
+        "via": "open",
+        "cost": 0
+      },
+      {
+        "into": "loot vault\nS + W peeks",
+        "via": "StoneWindow",
+        "cost": 4
+      },
+      {
+        "into": "stairs from L0",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "ARMOURED CORE\nTC + bags",
+        "via": "GarageDoor",
+        "cost": 3
+      }
+    ],
+    "leaks": 0,
+    "codeLength": 2880
+  },
+  {
+    "slug": "bastion",
+    "name": "BASTION",
+    "tagline": "2x2 armoured-suite duo - 4 levels, 8-triangle honeycomb, 6 peeks, 15 large boxes, 14 rockets to the TC.",
+    "notes": [
+      "Point the airlock triangle at your least open approach. Two L2 embrasures look straight down onto it.",
+      "Every door on the loot path is a garage door: 3 rockets or 9 satchels each, against 2 and 4 for a metal door.",
+      "L2 is the cheap floor on purpose. It eats the first breach, it holds the peeks, and nothing good lives there.",
+      "The suite (C + D on L1) is sealed top and bottom by armoured slabs, so it cannot be splashed from L0 or L2."
+    ],
+    "objects": 154,
+    "structural": 130,
+    "build": {
+      "stone": 21810,
+      "metal": 3150,
+      "hqm": 279,
+      "wood": 4193
+    },
+    "upkeep": {
+      "stone": 3397,
+      "metal": 491,
+      "hqm": 43,
+      "wood": 653
+    },
+    "upkeepRampup": 0.15576923076923077,
+    "rocketsToTC": 14,
+    "sulfurToTC": 19600,
+    "targets": [
+      {
+        "level": 2,
+        "label": "battery / solar\nN + W peeks",
+        "rockets": 4
+      },
+      {
+        "level": 2,
+        "label": "overflow store\nN + E peeks",
+        "rockets": 4
+      },
+      {
+        "level": 0,
+        "label": "smelting",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk storage",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "loot vault\n+ workbench",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "SUITE: utility\n+ electricity",
+        "rockets": 11
+      },
+      {
+        "level": 1,
+        "label": "SUITE: core\nTC + bags",
+        "rockets": 14
+      }
+    ],
+    "tcRoute": [
+      {
+        "into": "",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "loot vault\n+ workbench",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "SUITE: utility\n+ electricity",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "SUITE: core\nTC + bags",
+        "via": "GarageDoor",
+        "cost": 3
+      }
+    ],
+    "leaks": 0,
+    "codeLength": 4028
+  },
+  {
+    "slug": "citadel",
+    "name": "CITADEL",
+    "tagline": "3x2 keep-and-bailey duo - 4 levels, 10-triangle honeycomb, 8 peeks, 28 large boxes, 16 rockets to the TC.",
+    "notes": [
+      "Late-wipe base. Do not start it until you can hold the full stone bill plus 431 HQM.",
+      "Split your loot on purpose: explosives and guns in the keep, components in the side vaults, farm on the ground.",
+      "Cell E never gets a window, an outside door, or a second entrance on either storey. Keep it that way.",
+      "Build the stone shell first and upgrade the keep to armoured later - the layout does not change."
+    ],
+    "objects": 220,
+    "structural": 177,
+    "build": {
+      "stone": 28410,
+      "metal": 4700,
+      "hqm": 431,
+      "wood": 5595
+    },
+    "upkeep": {
+      "stone": 4801,
+      "metal": 794,
+      "hqm": 73,
+      "wood": 945
+    },
+    "upkeepRampup": 0.16898305084745763,
+    "rocketsToTC": 16,
+    "sulfurToTC": 22400,
+    "targets": [
+      {
+        "level": 2,
+        "label": "battery / solar\nN + E peeks",
+        "rockets": 4
+      },
+      {
+        "level": 0,
+        "label": "smelting bay",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk store 1",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk store 2",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "workshop",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "side vault 1",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "side vault 2",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "KEEP 1\nelectricity",
+        "rockets": 10
+      },
+      {
+        "level": 2,
+        "label": "HIGH VAULT",
+        "rockets": 10
+      },
+      {
+        "level": 1,
+        "label": "KEEP 2\nammo + meds",
+        "rockets": 13
+      },
+      {
+        "level": 1,
+        "label": "KEEP VAULT\nTC + bags",
+        "rockets": 16
+      }
+    ],
+    "tcRoute": [
+      {
+        "into": "",
+        "via": "open",
+        "cost": 0
+      },
+      {
+        "into": "watch - S + W",
+        "via": "StoneWindow",
+        "cost": 4
+      },
+      {
+        "into": "stair top",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "stairs L0 -> L2",
+        "via": "open sky",
+        "cost": 0
+      },
+      {
+        "into": "KEEP 1\nelectricity",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "KEEP 2\nammo + meds",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "KEEP VAULT\nTC + bags",
+        "via": "GarageDoor",
+        "cost": 3
+      }
+    ],
+    "leaks": 0,
+    "codeLength": 5416
+  },
+  {
+    "slug": "caltrop",
+    "name": "CALTROP",
+    "tagline": "2x2 rosette turret - 5 levels, 20 slots on 12 bearings exactly 30 deg apart, and a 3-storey murder shaft over the front door.",
+    "notes": [
+      "Point the airlock triangle at your busiest approach. It is the one you WANT people walking into.",
+      "Fight from the gallery (L2), not the crown. The crown is for range and for watching; the gallery has the shaft.",
+      "Leave the oubliette pod's garage door open when you are home and shut it when you log. Closed, it costs the base nothing.",
+      "Nothing valuable above L1. Both firing floors are meant to be lost."
+    ],
+    "objects": 200,
+    "structural": 177,
+    "build": {
+      "stone": 26955,
+      "metal": 4750,
+      "hqm": 391,
+      "wood": 5291
+    },
+    "upkeep": {
+      "stone": 4555,
+      "metal": 803,
+      "hqm": 66,
+      "wood": 894
+    },
+    "upkeepRampup": 0.16898305084745763,
+    "rocketsToTC": 14,
+    "sulfurToTC": 19600,
+    "targets": [
+      {
+        "level": 0,
+        "label": "smelting",
+        "rockets": 8
+      },
+      {
+        "level": 0,
+        "label": "bulk storage",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "loot vault\n+ workbench",
+        "rockets": 8
+      },
+      {
+        "level": 1,
+        "label": "SUITE: utility\n+ electricity",
+        "rockets": 11
+      },
+      {
+        "level": 1,
+        "label": "SUITE: core\nTC + bags",
+        "rockets": 14
+      }
+    ],
+    "tcRoute": [
+      {
+        "into": "",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "loot vault\n+ workbench",
+        "via": "StoneWallHigh",
+        "cost": 4
+      },
+      {
+        "into": "SUITE: utility\n+ electricity",
+        "via": "GarageDoor",
+        "cost": 3
+      },
+      {
+        "into": "SUITE: core\nTC + bags",
+        "via": "GarageDoor",
+        "cost": 3
+      }
+    ],
+    "leaks": 0,
+    "codeLength": 5104
+  }
+]
